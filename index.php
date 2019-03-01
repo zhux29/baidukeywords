@@ -4,8 +4,8 @@ if(!ini_get('safe_mode')){set_time_limit(0);}
 header('Content-type: text/html; charset=utf-8');
 function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
     $res='';
-    if($page > 5){
-        $res .= '<tr><td>'.$keyword.'</td><td>0</td><td>5页之外</td></tr>';
+    if($page > 10){
+        $res .= '<tr><td>'.$keyword.'</td><td>0</td><td>10页之外</td></tr>';
         return $res;
     }else{
     $pm = ($page - 1) * 10;
@@ -36,8 +36,9 @@ function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
     $contents = curl_exec($curl);
     //print_r(curl_getinfo($curl));
     curl_close($curl);
-    $preg='/<div\s+class=\"f13\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
+   $preg='/<div\s+class=\"f13\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
     preg_match_all($preg,$contents,$rs);
+    //print_r($rs[0]);
     foreach($rs[0] as $k=>$v){
         $pm++;
         if(strstr($v,$url)){
