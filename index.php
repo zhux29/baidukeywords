@@ -44,6 +44,7 @@ function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
         if(strstr($v,$url)){
             $rsState = true;
             $res .='<tr><td><a target="_blank" href="http://www.baidu.com/s?wd='.$enKeyword.'&pn='.$firstRow.'">'.$keyword .'</a></td><td>'.$pm.'</td><td>第'. $page . '页</td></tr>';
+            return $res;//只返回第一个排名数据
         }
     }
     unset($contents);
