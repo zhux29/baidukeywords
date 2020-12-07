@@ -57,7 +57,7 @@ function multiCurl($keyword,$web_url,$urls,$ip) {
 
     foreach ($urls as $i => $url){
         $data[$i] = curl_multi_getcontent($conn[$i]);
-        $preg='/<div\s+class=\"f13\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
+        $preg='/<div\s+class=\"f13[\s\S]*?\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
         preg_match_all($preg,$data[$i],$rs);
         foreach($rs[0] as $k=>$v){
             if(strstr($v,$web_url)){

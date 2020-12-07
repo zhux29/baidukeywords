@@ -36,7 +36,7 @@ function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
     $contents = curl_exec($curl);
     //print_r(curl_getinfo($curl));
     curl_close($curl);
-   $preg='/<div\s+class=\"f13\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
+   $preg='/<div\s+class=\"f13[\s\S]*?\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
     preg_match_all($preg,$contents,$rs);
     //print_r($rs[0]);
     foreach($rs[0] as $k=>$v){
