@@ -2,15 +2,25 @@
 百度关键词排名批量查询
 
 ##20201207更新
+
 百度更新了html代码
+
 $preg='/<div\s+class=\"f13\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
+
 原正则修改一下就行.
+
 $preg='/<div\s+class=\"f13[\s\S]*?\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
+
 不过对于百家号的形式,目前没匹配.开始的时候匹配过,后没想好怎么合并.
+
 凑合用吧.
+
 QQ925474725
+
 网址:www.menglei.net/2799/
+
 github的是最新的.网址中是原始的
+
 ##20191115更新
 多线程版本 indexs.php
 单线程版本 index.php
