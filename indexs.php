@@ -57,14 +57,18 @@ function multiCurl($keyword,$web_url,$urls,$ip) {
 
     foreach ($urls as $i => $url){
         $data[$i] = curl_multi_getcontent($conn[$i]);
+        $tdata = str_replace('<b>','',$data[$i]);
+        $tdata = str_replace('</b>','',$tdata);
         $preg='/<div\s+class=\"f13[\s\S]*?\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
-        preg_match_all($preg,$data[$i],$rs);
+        preg_match_all($preg,$tdata,$rs);
         foreach($rs[0] as $k=>$v){
             if(strstr($v,$web_url)){
                 $pm .='<a target="_blank" href="'.$url.'">'.(($i*10)+$k+1).'</a>,';
                 break 2;//作用:当有数据时,跳出上一层foreach循环,只输出第一个排名,注释这里可以输出前10页的所有排名
             }
         }
+        unset($data[$i]);
+        unset($tdata);
     }
     foreach ($urls as $i => $url) {   
       curl_multi_remove_handle($mh,$conn[$i]);   
