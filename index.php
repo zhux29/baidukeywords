@@ -34,10 +34,12 @@ function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
     curl_setopt($curl, CURLOPT_HEADER, 0); // 显示返回的Header区域内容
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // 获取的信息以文件流的形式返回
     $contents = curl_exec($curl);
+    $tdata = str_replace('<b>','',$contents);
+    $tdata = str_replace('</b>','',$tdata);
     //print_r(curl_getinfo($curl));
     curl_close($curl);
    $preg='/<div\s+class=\"f13[\s\S]*?\"><a\s+target=\"_blank\"\s+href=\"[^>]+\">[\s\S]*?<\/a><\/div>/i';
-    preg_match_all($preg,$contents,$rs);
+    preg_match_all($preg,$tdata,$rs);
     //print_r($rs[0]);
     foreach($rs[0] as $k=>$v){
         $pm++;
@@ -47,7 +49,9 @@ function search($keyword,$url,$ip ='113.102.128.247',$page = 1 ){
             return $res;//只返回第一个排名数据
         }
     }
+    unset($rs);
     unset($contents);
+    unset($tdata);
     if($rsState === false){
         $res .= search($keyword, $url,$ip,++$page);
     }
